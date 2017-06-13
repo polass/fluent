@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9226e2e44ef3424ddfcd373325e11a25",
+    "content-hash": "b5169e3cdc26174f431fbbb7363eb967",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -961,7 +961,7 @@
                 "hidden",
                 "reflection"
             ],
-            "time": "2017-06-10T07:29:02+00:00"
+            "time": "2017-06-10 07:29:02"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -1583,7 +1583,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
         "polass/exposer": 20
     },

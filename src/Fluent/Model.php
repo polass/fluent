@@ -23,6 +23,66 @@ class Model extends Fluent
     }
 
     /**
+     * フィールドが属性を持っているか
+     *
+     * @param string $key
+     * @return bool
+     */
+    protected function hasAttributeInArray($key)
+    {
+        return isset($this->attributes[$key]);
+    }
+
+    /**
+     * フィールドから属性を取得
+     *
+     * @param string $key
+     * @return mixed
+     */
+    protected function getAttributeFromArray($key)
+    {
+        if ($this->hasAttributeInArray($key)) {
+            return $this->attributes[$key];
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
+     * フィールドに属性を設定
+     *
+     * @param string $key
+     * @param mixed $value
+     * @return void
+     */
+    protected function setAttributeInArray($key, $value)
+    {
+        $this->attributes[$key] = $value;
+    }
+
+    /**
+     * フィールドから属性を削除
+     *
+     * @param string $key
+     * @return void
+     */
+    protected function unsetAttributeInArray($key)
+    {
+        unset($this->attributes[$key]);
+    }
+
+    /**
+     * フィールドから属性の名前を取得
+     *
+     * @return array
+     */
+    protected function getAttributeKeys()
+    {
+        return array_keys($this->attributes);
+    }
+
+    /**
      * 属性のミューテタが実装されているか
      *
      * @param string $key
@@ -103,7 +163,7 @@ class Model extends Fluent
             return $this->{$method}($value);
         }
 
-        $this->attributes[$key] = $value;
+        $this->setAttributeInArray($key, $value);
 
         return $this;
     }
@@ -147,7 +207,7 @@ class Model extends Fluent
             return $this->{$method}($key);
         }
 
-        return isset($this->attributes[$key]);
+        return $this->hasAttributeInArray($key);
     }
 
     /**
@@ -159,7 +219,7 @@ class Model extends Fluent
      */
     public function get($key, $default = null)
     {
-        $value = isset($this->attributes[$key]) ? $this->attributes[$key] : null;
+        $value = $this->getAttributeFromArray($key);
 
         if ($this->hasGetMutator($key)) {
             $method = $this->getGetMutator($key);
@@ -179,7 +239,7 @@ class Model extends Fluent
     {
         $attributes = [];
 
-        foreach (array_keys($this->attributes) as $key) {
+        foreach ($this->getAttributeKeys() as $key) {
             $attributes[$key] = $this->get($key);
         }
 
@@ -273,7 +333,7 @@ class Model extends Fluent
      */
     public function __unset($key)
     {
-        unset($this->attributes[$key]);
+        $this->unsetAttributeInArray($key);
     }
 
     /**

@@ -207,7 +207,7 @@ class Model extends Fluent
             return $this->{$method}($key);
         }
 
-        return $this->hasAttributeInArray($key);
+        return $this->get($key) !== null;
     }
 
     /**

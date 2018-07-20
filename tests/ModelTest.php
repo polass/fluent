@@ -14,7 +14,7 @@ class ModelTest extends TestCase
      *
      * @var array
      */
-    public $array = [ 'foo' => 'FOO', 'bar' => 'BAR' ];
+    public $array = [ 'foo' => 'FOO', 'bar' => 'BAR', 'qux' => 'QUX' ];
 
     /**
      * テストに使う Arrayable を持つクラスのインスタンス
@@ -384,12 +384,14 @@ class ModelTest extends TestCase
      */
     public function testGetAttributes()
     {
-        $instance = new Stubs\ModelWithMutators;
+        $instance = new Stubs\ModelWithMutators();
 
         $this->assertTrue(is_array($instance->getAttributes()));
         $this->assertEmpty($instance->getAttributes());
 
         $instance->fill($this->array);
+        $instance->visible = [ 'foobar' ];
+        $instance->hidden = [ 'qux' ];
         $attributes = $instance->getAttributes();
 
         $this->assertArrayHasKey('foo', $attributes);
@@ -397,6 +399,10 @@ class ModelTest extends TestCase
         $this->assertArrayNotHasKey('baz', $attributes);
         $this->assertEquals('mutated `mutated `FOO``', $attributes['foo']);
         $this->assertEquals('BAR', $attributes['bar']);
+
+        $this->assertArrayNotHasKey('qux', $attributes);
+        $this->assertArrayHasKey('foobar', $attributes);
+        $this->assertEquals('FOOBAR', $attributes['foobar']);
     }
 
     /**

@@ -237,6 +237,12 @@ class Model extends Fluent
         $attributes = [];
 
         foreach ($this->getAttributeKeys() as $key) {
+            if (! in_array($key, $this->hidden ?? [], true)) {
+                $attributes[$key] = $this->get($key);
+            }
+        }
+
+        foreach ($this->visible ?? [] as $key) {
             $attributes[$key] = $this->get($key);
         }
 

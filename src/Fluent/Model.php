@@ -43,8 +43,7 @@ class Model extends Fluent
     {
         if ($this->hasAttributeInArray($key)) {
             return $this->attributes[$key];
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -180,13 +179,11 @@ class Model extends Fluent
     {
         if ($values instanceOf Arrayable) {
             $values = $values->toArray();
-        }
-        elseif (! is_array($values)) {
+        } elseif (! is_array($values)) {
             throw new InvalidArgumentException('Argument must be Arrayable.');
         }
 
-        foreach ($values as $key => $value)
-        {
+        foreach ($values as $key => $value) {
             $this->set($key, $value);
         }
 
@@ -293,8 +290,7 @@ class Model extends Fluent
     {
         if (($count = count($parameters)) === 1) {
             $parameters = $parameters[0];
-        }
-        elseif ($count === 0) {
+        } elseif ($count === 0) {
             $parameters = null;
         }
 

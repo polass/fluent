@@ -6,6 +6,10 @@ use Polass\Fluent\Model;
 
 class ModelWithMutators extends Model
 {
+    public $visible;
+
+    public $hidden;
+
     public function setFooAttribute($value)
     {
         $this->attributes['foo'] = sprintf("mutated `%s`", (string)$value);
@@ -19,5 +23,10 @@ class ModelWithMutators extends Model
     public function hasFooAttribute($value)
     {
         return true;
+    }
+
+    public function getFoobarAttribute()
+    {
+        return 'FOOBAR';
     }
 }

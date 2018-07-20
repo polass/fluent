@@ -339,6 +339,17 @@ class Model extends Fluent
     }
 
     /**
+     * 属性を持っているか
+     *
+     * @param  string  $offset
+     * @return bool
+     */
+    public function offsetExists($offset)
+    {
+        return $this->has($offset);
+    }
+
+    /**
      * インスタンスが持つ属性を文字列に変換
      *
      * @return string

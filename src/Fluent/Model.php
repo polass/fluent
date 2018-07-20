@@ -177,7 +177,7 @@ class Model extends Fluent
      */
     public function fill($values)
     {
-        if ($values instanceOf Arrayable) {
+        if ($values instanceof Arrayable) {
             $values = $values->toArray();
         } elseif (! is_array($values)) {
             throw new InvalidArgumentException('Argument must be Arrayable.');
